@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// import { observer, useQuery } from "@startupjs/react-sharedb";
 import {
   StyleSheet,
   Text,
@@ -10,6 +11,15 @@ import {
 } from "react-native";
 
 const App = () => {
+  /**
+   * Query
+   */
+
+  // const [users, $users] = useQuery("users");
+  // console.log(users);
+  /**
+   * State
+   */
   const [newTodoValue, setNewTodoValue] = useState("");
   const [todoList, setTodoList] = useState([]);
   const [editingId, setEditingId] = useState("");
@@ -66,6 +76,10 @@ const App = () => {
     setNewTodoValue("");
   };
 
+  useEffect(() => {
+    // $users.push({ id: users.length, title: "the man first" });
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Todo App</Text>
@@ -86,6 +100,7 @@ const App = () => {
 
       <View style={{ display: "flex", flexDirection: "row", padding: 20 }}>
         <Text>
+          {/* {users.map(u => u)} */}
           Completed/All: {completedCount}/{todoList.length}
         </Text>
       </View>
@@ -122,10 +137,13 @@ const App = () => {
                 style={{
                   display: "flex",
                   flexDirection: "row",
-                  justifyContent: "space-between",
+                  justifyContent: "space-between"
                 }}
               >
-                <TouchableOpacity style={{ flex: 1 }} onPress={() => handleEdit(id, title)}>
+                <TouchableOpacity
+                  style={{ flex: 1 }}
+                  onPress={() => handleEdit(id, title)}
+                >
                   <Text>{title}</Text>
                 </TouchableOpacity>
 
@@ -159,4 +177,5 @@ const styles = StyleSheet.create({
   }
 });
 
+// export default observer(App);
 export default App;
